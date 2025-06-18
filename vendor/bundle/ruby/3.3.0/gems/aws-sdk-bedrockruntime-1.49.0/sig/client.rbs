@@ -1,0 +1,599 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockRuntime
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ApplyGuardrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplyGuardrailResponse]
+        def usage: () -> Types::GuardrailUsage
+        def action: () -> ("NONE" | "GUARDRAIL_INTERVENED")
+        def action_reason: () -> ::String
+        def outputs: () -> ::Array[Types::GuardrailOutputContent]
+        def assessments: () -> ::Array[Types::GuardrailAssessment]
+        def guardrail_coverage: () -> Types::GuardrailCoverage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#apply_guardrail-instance_method
+      def apply_guardrail: (
+                             guardrail_identifier: ::String,
+                             guardrail_version: ::String,
+                             source: ("INPUT" | "OUTPUT"),
+                             content: Array[
+                               {
+                                 text: {
+                                   text: ::String,
+                                   qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+                                 }?,
+                                 image: {
+                                   format: ("png" | "jpeg"),
+                                   source: {
+                                     bytes: ::String?
+                                   }
+                                 }?
+                               },
+                             ],
+                             ?output_scope: ("INTERVENTIONS" | "FULL")
+                           ) -> _ApplyGuardrailResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplyGuardrailResponseSuccess
+
+      interface _ConverseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConverseResponse]
+        def output: () -> Types::ConverseOutput
+        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
+        def usage: () -> Types::TokenUsage
+        def metrics: () -> Types::ConverseMetrics
+        def additional_model_response_fields: () -> untyped
+        def trace: () -> Types::ConverseTrace
+        def performance_config: () -> Types::PerformanceConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse-instance_method
+      def converse: (
+                      model_id: ::String,
+                      ?messages: Array[
+                        {
+                          role: ("user" | "assistant"),
+                          content: Array[
+                            {
+                              text: ::String?,
+                              image: {
+                                format: ("png" | "jpeg" | "gif" | "webp"),
+                                source: {
+                                  bytes: ::String?,
+                                  s3_location: {
+                                    uri: ::String,
+                                    bucket_owner: ::String?
+                                  }?
+                                }
+                              }?,
+                              document: {
+                                format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                name: ::String,
+                                source: {
+                                  bytes: ::String?,
+                                  s3_location: {
+                                    uri: ::String,
+                                    bucket_owner: ::String?
+                                  }?
+                                }
+                              }?,
+                              video: {
+                                format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
+                                source: {
+                                  bytes: ::String?,
+                                  s3_location: {
+                                    uri: ::String,
+                                    bucket_owner: ::String?
+                                  }?
+                                }
+                              }?,
+                              tool_use: {
+                                tool_use_id: ::String,
+                                name: ::String,
+                                input: {
+                                }
+                              }?,
+                              tool_result: {
+                                tool_use_id: ::String,
+                                content: Array[
+                                  {
+                                    json: {
+                                    }?,
+                                    text: ::String?,
+                                    image: {
+                                      format: ("png" | "jpeg" | "gif" | "webp"),
+                                      source: {
+                                        bytes: ::String?,
+                                        s3_location: {
+                                          uri: ::String,
+                                          bucket_owner: ::String?
+                                        }?
+                                      }
+                                    }?,
+                                    document: {
+                                      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                      name: ::String,
+                                      source: {
+                                        bytes: ::String?,
+                                        s3_location: {
+                                          uri: ::String,
+                                          bucket_owner: ::String?
+                                        }?
+                                      }
+                                    }?,
+                                    video: {
+                                      format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
+                                      source: {
+                                        bytes: ::String?,
+                                        s3_location: {
+                                          uri: ::String,
+                                          bucket_owner: ::String?
+                                        }?
+                                      }
+                                    }?
+                                  },
+                                ],
+                                status: ("success" | "error")?
+                              }?,
+                              guard_content: {
+                                text: {
+                                  text: ::String,
+                                  qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+                                }?,
+                                image: {
+                                  format: ("png" | "jpeg"),
+                                  source: {
+                                    bytes: ::String?
+                                  }
+                                }?
+                              }?,
+                              cache_point: {
+                                type: ("default")
+                              }?,
+                              reasoning_content: {
+                                reasoning_text: {
+                                  text: ::String,
+                                  signature: ::String?
+                                }?,
+                                redacted_content: ::String?
+                              }?
+                            },
+                          ]
+                        },
+                      ],
+                      ?system: Array[
+                        {
+                          text: ::String?,
+                          guard_content: {
+                            text: {
+                              text: ::String,
+                              qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+                            }?,
+                            image: {
+                              format: ("png" | "jpeg"),
+                              source: {
+                                bytes: ::String?
+                              }
+                            }?
+                          }?,
+                          cache_point: {
+                            type: ("default")
+                          }?
+                        },
+                      ],
+                      ?inference_config: {
+                        max_tokens: ::Integer?,
+                        temperature: ::Float?,
+                        top_p: ::Float?,
+                        stop_sequences: Array[::String]?
+                      },
+                      ?tool_config: {
+                        tools: Array[
+                          {
+                            tool_spec: {
+                              name: ::String,
+                              description: ::String?,
+                              input_schema: {
+                                json: {
+                                }?
+                              }
+                            }?,
+                            cache_point: {
+                              type: ("default")
+                            }?
+                          },
+                        ],
+                        tool_choice: {
+                          auto: {
+                          }?,
+                          any: {
+                          }?,
+                          tool: {
+                            name: ::String
+                          }?
+                        }?
+                      },
+                      ?guardrail_config: {
+                        guardrail_identifier: ::String,
+                        guardrail_version: ::String,
+                        trace: ("enabled" | "disabled" | "enabled_full")?
+                      },
+                      ?additional_model_request_fields: {
+                      },
+                      ?prompt_variables: Hash[::String, {
+                          text: ::String?
+                        }],
+                      ?additional_model_response_field_paths: Array[::String],
+                      ?request_metadata: Hash[::String, ::String],
+                      ?performance_config: {
+                        latency: ("standard" | "optimized")?
+                      }
+                    ) -> _ConverseResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConverseResponseSuccess
+
+      interface _ConverseStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConverseStreamResponse]
+        def stream: () -> Types::ConverseStreamOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse_stream-instance_method
+      def converse_stream: (
+                             model_id: ::String,
+                             ?messages: Array[
+                               {
+                                 role: ("user" | "assistant"),
+                                 content: Array[
+                                   {
+                                     text: ::String?,
+                                     image: {
+                                       format: ("png" | "jpeg" | "gif" | "webp"),
+                                       source: {
+                                         bytes: ::String?,
+                                         s3_location: {
+                                           uri: ::String,
+                                           bucket_owner: ::String?
+                                         }?
+                                       }
+                                     }?,
+                                     document: {
+                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                       name: ::String,
+                                       source: {
+                                         bytes: ::String?,
+                                         s3_location: {
+                                           uri: ::String,
+                                           bucket_owner: ::String?
+                                         }?
+                                       }
+                                     }?,
+                                     video: {
+                                       format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
+                                       source: {
+                                         bytes: ::String?,
+                                         s3_location: {
+                                           uri: ::String,
+                                           bucket_owner: ::String?
+                                         }?
+                                       }
+                                     }?,
+                                     tool_use: {
+                                       tool_use_id: ::String,
+                                       name: ::String,
+                                       input: {
+                                       }
+                                     }?,
+                                     tool_result: {
+                                       tool_use_id: ::String,
+                                       content: Array[
+                                         {
+                                           json: {
+                                           }?,
+                                           text: ::String?,
+                                           image: {
+                                             format: ("png" | "jpeg" | "gif" | "webp"),
+                                             source: {
+                                               bytes: ::String?,
+                                               s3_location: {
+                                                 uri: ::String,
+                                                 bucket_owner: ::String?
+                                               }?
+                                             }
+                                           }?,
+                                           document: {
+                                             format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                             name: ::String,
+                                             source: {
+                                               bytes: ::String?,
+                                               s3_location: {
+                                                 uri: ::String,
+                                                 bucket_owner: ::String?
+                                               }?
+                                             }
+                                           }?,
+                                           video: {
+                                             format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
+                                             source: {
+                                               bytes: ::String?,
+                                               s3_location: {
+                                                 uri: ::String,
+                                                 bucket_owner: ::String?
+                                               }?
+                                             }
+                                           }?
+                                         },
+                                       ],
+                                       status: ("success" | "error")?
+                                     }?,
+                                     guard_content: {
+                                       text: {
+                                         text: ::String,
+                                         qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+                                       }?,
+                                       image: {
+                                         format: ("png" | "jpeg"),
+                                         source: {
+                                           bytes: ::String?
+                                         }
+                                       }?
+                                     }?,
+                                     cache_point: {
+                                       type: ("default")
+                                     }?,
+                                     reasoning_content: {
+                                       reasoning_text: {
+                                         text: ::String,
+                                         signature: ::String?
+                                       }?,
+                                       redacted_content: ::String?
+                                     }?
+                                   },
+                                 ]
+                               },
+                             ],
+                             ?system: Array[
+                               {
+                                 text: ::String?,
+                                 guard_content: {
+                                   text: {
+                                     text: ::String,
+                                     qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+                                   }?,
+                                   image: {
+                                     format: ("png" | "jpeg"),
+                                     source: {
+                                       bytes: ::String?
+                                     }
+                                   }?
+                                 }?,
+                                 cache_point: {
+                                   type: ("default")
+                                 }?
+                               },
+                             ],
+                             ?inference_config: {
+                               max_tokens: ::Integer?,
+                               temperature: ::Float?,
+                               top_p: ::Float?,
+                               stop_sequences: Array[::String]?
+                             },
+                             ?tool_config: {
+                               tools: Array[
+                                 {
+                                   tool_spec: {
+                                     name: ::String,
+                                     description: ::String?,
+                                     input_schema: {
+                                       json: {
+                                       }?
+                                     }
+                                   }?,
+                                   cache_point: {
+                                     type: ("default")
+                                   }?
+                                 },
+                               ],
+                               tool_choice: {
+                                 auto: {
+                                 }?,
+                                 any: {
+                                 }?,
+                                 tool: {
+                                   name: ::String
+                                 }?
+                               }?
+                             },
+                             ?guardrail_config: {
+                               guardrail_identifier: ::String,
+                               guardrail_version: ::String,
+                               trace: ("enabled" | "disabled" | "enabled_full")?,
+                               stream_processing_mode: ("sync" | "async")?
+                             },
+                             ?additional_model_request_fields: {
+                             },
+                             ?prompt_variables: Hash[::String, {
+                                 text: ::String?
+                               }],
+                             ?additional_model_response_field_paths: Array[::String],
+                             ?request_metadata: Hash[::String, ::String],
+                             ?performance_config: {
+                               latency: ("standard" | "optimized")?
+                             }
+                           ) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
+
+      interface _GetAsyncInvokeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAsyncInvokeResponse]
+        def invocation_arn: () -> ::String
+        def model_arn: () -> ::String
+        def client_request_token: () -> ::String
+        def status: () -> ("InProgress" | "Completed" | "Failed")
+        def failure_message: () -> ::String
+        def submit_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def end_time: () -> ::Time
+        def output_data_config: () -> Types::AsyncInvokeOutputDataConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#get_async_invoke-instance_method
+      def get_async_invoke: (
+                              invocation_arn: ::String
+                            ) -> _GetAsyncInvokeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAsyncInvokeResponseSuccess
+
+      interface _InvokeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelResponse]
+        def body: () -> ::String
+        def content_type: () -> ::String
+        def performance_config_latency: () -> ("standard" | "optimized")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#invoke_model-instance_method
+      def invoke_model: (
+                          ?body: ::String,
+                          ?content_type: ::String,
+                          ?accept: ::String,
+                          model_id: ::String,
+                          ?trace: ("ENABLED" | "DISABLED" | "ENABLED_FULL"),
+                          ?guardrail_identifier: ::String,
+                          ?guardrail_version: ::String,
+                          ?performance_config_latency: ("standard" | "optimized")
+                        ) -> _InvokeModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
+
+      interface _InvokeModelWithResponseStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithResponseStreamResponse]
+        def body: () -> Types::ResponseStream
+        def content_type: () -> ::String
+        def performance_config_latency: () -> ("standard" | "optimized")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#invoke_model_with_response_stream-instance_method
+      def invoke_model_with_response_stream: (
+                                               ?body: ::String,
+                                               ?content_type: ::String,
+                                               ?accept: ::String,
+                                               model_id: ::String,
+                                               ?trace: ("ENABLED" | "DISABLED" | "ENABLED_FULL"),
+                                               ?guardrail_identifier: ::String,
+                                               ?guardrail_version: ::String,
+                                               ?performance_config_latency: ("standard" | "optimized")
+                                             ) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
+
+      interface _ListAsyncInvokesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAsyncInvokesResponse]
+        def next_token: () -> ::String
+        def async_invoke_summaries: () -> ::Array[Types::AsyncInvokeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#list_async_invokes-instance_method
+      def list_async_invokes: (
+                                ?submit_time_after: ::Time,
+                                ?submit_time_before: ::Time,
+                                ?status_equals: ("InProgress" | "Completed" | "Failed"),
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?sort_by: ("SubmissionTime"),
+                                ?sort_order: ("Ascending" | "Descending")
+                              ) -> _ListAsyncInvokesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAsyncInvokesResponseSuccess
+
+      interface _StartAsyncInvokeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAsyncInvokeResponse]
+        def invocation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#start_async_invoke-instance_method
+      def start_async_invoke: (
+                                ?client_request_token: ::String,
+                                model_id: ::String,
+                                model_input: {
+                                },
+                                output_data_config: {
+                                  s3_output_data_config: {
+                                    s3_uri: ::String,
+                                    kms_key_id: ::String?,
+                                    bucket_owner: ::String?
+                                  }?
+                                },
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _StartAsyncInvokeResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAsyncInvokeResponseSuccess
+    end
+  end
+end
+

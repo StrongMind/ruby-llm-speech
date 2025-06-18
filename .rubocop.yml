@@ -1,0 +1,54 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - 'examples/**/*'
+
+# Increase line length limit
+Layout/LineLength:
+  Max: 120
+
+# Allow longer methods for complex speech handling
+Metrics/MethodLength:
+  Max: 20
+
+# Allow longer classes for client wrappers
+Metrics/ClassLength:
+  Max: 150
+
+# Allow more parameters for audio configuration
+Metrics/ParameterLists:
+  Max: 6
+
+# Allow more complexity for event handling
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# Allow longer blocks for configuration
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'Rakefile'
+    - '*.gemspec'
+
+# Documentation is good but not always required
+Style/Documentation:
+  Enabled: false
+
+# Allow both single and double quotes
+Style/StringLiterals:
+  Enabled: false
+
+# Allow trailing commas in multiline arrays/hashes
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+# Allow flexibility in hash syntax
+Style/HashSyntax:
+  Enabled: false

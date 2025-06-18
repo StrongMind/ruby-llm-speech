@@ -1,0 +1,48 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Local configuration
+.env
+.env.local
+
+# Gem files
+*.gem
+
+# Audio test files
+*.wav
+*.mp3
+*.m4a
+*.flac
+
+# AWS configuration
+.aws/

@@ -49,3 +49,5 @@ pids
 
 # Transcript storage
 .ruby_llm_speech/
+
+.env
